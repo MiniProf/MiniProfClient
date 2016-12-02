@@ -1,0 +1,69 @@
+#TopBar{
+  background-color: #b9b9b9;
+}
+@media screen and (max-width: 850px) {
+  img#BofALogo{
+    display: none !important;
+  }
+}
+/** SearchPage CSS**/
+.page{
+  padding: 10px 2%;
+}
+#SearchPage #listPreferences .ui.divided.list{
+  border:#000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/** IndexPage CSS**/
+#IndexPage .ui.button.fluid.homeButton{
+  margin: 2vh 0px;
+  width: 96vw;
+  font-size: 7vh;
+}
+
+#IndexPage #userIcon{
+  float: left;
+  font-size: 3em;
+}
+
+#IndexPage #helpIcon{
+  float: right;
+  font-size: 3.5em;
+}
+
+#Date {
+  font-size: 3em;
+  text-align: center;
+}
+
+#Date #checkboxes {
+    margin-top: 6vh;
+}
+#checkboxes div{
+  margin:3vh;
+}
+#checkboxes div input{
+  transform: scale(2);
+}
+
+
+#helpFeatures #italicWrite {
+  font-style: italic;
+}
+
+#prof #imgg {
+  height: 33vh;
+  border-radius: 60%;
+}
+#image{
+  display: inline-block;
+}
+#prof.page .content{
+  width: 75%;
+  display: inline-block;
+}
+
+/*$('.ui.sidebar')
+  .sidebar('toggle')
+;*/

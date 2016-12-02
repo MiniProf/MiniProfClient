@@ -1,0 +1,33 @@
+{
+  "name": "BTC",
+  "version": "1.0.1",
+  "description": "Barclays Technology Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack && cordova run browser"
+  },
+  "keywords": [],
+  "author": [
+    "George Wilson",
+    "Muhammed Patel"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.12.12"
+  },
+  "dependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "elemental": "^0.6.1",
+    "jsx-loader": "^0.13.2",
+    "material-ui": "^0.16.4",
+    "react": "^15.4.0",
+    "react-addons-css-transition-group": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-tap-event-plugin": "^2.0.1",
+    "react-toolbox": "^1.2.5",
+    "superagent": "^2.3.0"
+  }
+}

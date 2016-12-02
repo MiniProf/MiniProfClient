@@ -1,0 +1,5 @@
+www/bundle.js
+node_modules/*
+platforms/android/*
+platforms/browser/*
+plugins/cordova-plugin-whitelist
