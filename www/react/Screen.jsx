@@ -3,25 +3,19 @@ var TopBar = require('./components/TopBar');
 var Router = require('./components/Router').Router;
 var router = require('./components/Router').router;
 var IndexPage = require('./pages/IndexPage');
-var SearchPage = require('./pages/SearchPage');
-var FloorPlanPage = require('./pages/FloorPlanPage');
-var DateTime = require('./pages/DateTimePage');
-var FindPerson = require('./pages/FindPerson');
-var ProfilePage = require('./pages/ProfilePage');
-import mat from 'material-ui/Avatar';
-var HelpPage = require('./pages/HelpPage');
+var CreateSessionPage = require('./pages/CreateSessionPage');
+var PollReviewPage = require('./pages/PollReviewPage');
+var StartPollPage = require('./pages/StartPollPage');
+
 
 const Screen = () =>(
   <div>
-      <TopBar router={router} title="Hot Potato"/>
+      <TopBar router={router} title="Mini-Prof" title1="Teach"/>
       <Router router={router}>
         <IndexPage path="/" router={router}/>
-        <SearchPage path="/search" router={router}/>
-        <FloorPlanPage path="/floor" router={router}/>
-        <DateTime path="/datetime" router={router}/>
-        <FindPerson path="/findperson" router={router}/>
-        <ProfilePage path="/profile" router={router}/>
-        <HelpPage path="/help" router={router}/>
+        <CreateSessionPage path="/CreateSessionPage" router={router}/>
+        <PollReviewPage path="/pReviewPage" router={router}/>
+        <StartPollPage path="/StartPollPage" router={router}/>
       </Router>
       {/*
       <div className="ui top attached demo menu">
