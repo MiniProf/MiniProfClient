@@ -1,7 +1,7 @@
 {
-  "name": "BTC",
+  "name": "MiniProfLecturer",
   "version": "1.0.1",
-  "description": "Barclays Technology Challenge",
+  "description": "MiniProf for Lecturers",
   "main": "index.js",
   "scripts": {
     "start": "webpack && cordova run browser"
