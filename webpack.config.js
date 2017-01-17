@@ -1,8 +1,8 @@
 module.exports = {
   entry:  './www/react/components.js',
   output: {
-    path: './',
-    filename: './www/bundle.js'
+    path: './www',
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
