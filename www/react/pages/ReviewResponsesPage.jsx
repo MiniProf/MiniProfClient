@@ -1,13 +1,13 @@
 var React  = require('react');
 var TopBar = require('../components/TopBar');
-var PollReviewPage = React.createClass({
+var ReviewResponsesPage = React.createClass({
   getInitialState:()=>{
     return {};
   },
   render:function(){
     return(
-      <p>This is the review poll page</p>
+      <p>This is the review responses page</p>
     )
   }
 });
-module.exports = PollReviewPage;
+module.exports = ReviewResponsesPage;
