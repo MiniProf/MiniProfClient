@@ -29,6 +29,7 @@
     "react-dom": "^15.4.0",
     "react-tap-event-plugin": "^2.0.1",
     "react-toolbox": "^1.2.5",
+    "recharts": "^0.20.5",
     "superagent": "^2.3.0"
   }
 }

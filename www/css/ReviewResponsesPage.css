@@ -1,0 +1,13 @@
+.ReviewBlock {
+  width: 100%;
+  text-align: center;
+  font-size: 3em;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+#lecReviews .ReviewBlock:nth-child(odd){
+  background-color: #80ced6;
+}
+#lecReviews .ReviewBlock:nth-child(even){
+  background-color: #f0f0f0;
+}
