@@ -1,59 +1,50 @@
 var React  = require('react');
 var request = require('superagent');
 var TopBar = require('../components/TopBar');
+import {PieChart, Pie, Legend,Tooltip} from 'recharts';
 var StartPollPage = React.createClass({
   getInitialState:()=>{
     return {};
   },
   resetAPI:function() {
-    request.get("http://wilsonator.co.uk/PollReset.php").end((err,res)=>{});
+    request.get(serverName + "/PollReset.php").end((err,res)=>{});
   },
   render:function(){
     return(
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>
+        <PieChart width={800} height={400}>
+          <Pie isAnimationActive={false} data={this.state.pieData} cx={200} cy={200} outerRadius={80} fill="#8884d8" label/>
+          <Tooltip />
+       </PieChart>
         <button className = "fluid ui button" style = {{margin:"10px 0px"}} onClick={this.resetAPI}> Reset </button>
       </div>
     )
   },
   componentDidMount:function(){
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
 
-      var data = google.visualization.arrayToDataTable([
-        ['Answer','Votes'],
-        ['A',0],
-        ['B',0],
-        ['C',0],
-        ['D',0]
-      ])
 
-      var chart = new google.visualization.PieChart(document.getElementById('myChart'));
+    setInterval(()=>{
 
-      chart.draw(data, {title:""});
-
-    setInterval(function(){
-
-      request.get("http://wilsonator.co.uk/PollResult.php")
+      request.get(serverName + "PollResult.php")
       .set('Accept', 'application/json')
       .end( (err,res)=>{
-        var result = JSON.parse(res.text).results;
-        var data = google.visualization.arrayToDataTable([
-          ['Answer','Votes'],
-          ["A",result.A],
-          ["B",result.B],
-          ["C",result.C],
-          ["D",result.D]
-        ]);
-        chart.draw(data,{  width: window.innerWidth,
-  height: window.innerHeight*0.8,title:""});
+        res.body = JSON.parse(res.text.substr(0,38));
+        console.log(res.body);
+        debugger;
+        if(!err){
+          this.setState({pieData:[
+            {name:"A",value:res.body.results.A},
+            {name:"B",value:res.body.results.B},
+            {name:"C",value:res.body.results.C},
+            {name:"D",value:res.body.results.D}
+          ]});
+        }
         // Remove the first point so we dont just add values forever
       });
 
     },200);
 
   }
-}
 });
 module.exports = StartPollPage;

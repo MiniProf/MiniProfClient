@@ -23,7 +23,7 @@ var ReviewResponsesPage = React.createClass({
     return {};
   },
   componentWillMount:function() {
-    request.get("http://wilsonator.co.uk/MiniProf/Review?SESSIONID=000000")
+    request.get(serverName + "Review?SESSIONID=000000")
     .end((err,res)=>{
       debugger;
       this.setState({reviews:[{Quote:"#GOMO"},{Quote:"Shit Teacher"}]});
@@ -39,11 +39,11 @@ var ReviewResponsesPage = React.createClass({
       return(
 
       <div id="lecReviews">
-        <div className='line-chart-wrapper'>
+        <div style={{textAlign:"center"}} className='line-chart-wrapper'>
           <LineChart width={1050} height={250} data={data}
-          margin={{ top: 5, right: 300, left: 20, bottom: 45 }}>
+          margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
           <XAxis dataKey="time" label="Time(mins)"/>
-          <YAxis />
+          <YAxis label="No. of students"/>
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Legend />
