@@ -27,8 +27,18 @@ var ReviewResponsesPage = React.createClass({
     .end((err,res)=>{
       debugger;
       this.setState({reviews:[{Quote:"Excellent"},{Quote:"slide 3 was too vague"}]});
-    })
-
+      this.resize();
+    });
+  },
+  componentDidMount:function() {
+    window.addEventListener("resize", this.resize);
+  },
+  componentWillUnmount:function(){
+    window.removeEventListener("resize", this.resize);
+  },
+  resize:function(){
+    var width=$('body').width();
+    this.setState({width:width,height:width/3});
   },
   render:function(){
     if(this.state.reviews){
@@ -38,9 +48,9 @@ var ReviewResponsesPage = React.createClass({
       });
       return(
 
-      <div id="lecReviews">
+      <div id="lecReviews" onResize>
         <div style={{textAlign:"center"}} className='line-chart-wrapper'>
-          <LineChart width={1050} height={250} data={data}
+          <LineChart width={this.state.width} height={this.state.height} data={data}
           margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
           <XAxis dataKey="time" label="Time(mins)"/>
           <YAxis label="No. of students"/>
