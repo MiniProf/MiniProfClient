@@ -26,7 +26,7 @@ var ReviewResponsesPage = React.createClass({
     request.get(serverName + "Review?SESSIONID=000000")
     .end((err,res)=>{
       debugger;
-      this.setState({reviews:[{Quote:"#GOMO"},{Quote:"Shit Teacher"}]});
+      this.setState({reviews:[{Quote:"Excellent"},{Quote:"slide 3 was too vague"}]});
     })
 
   },

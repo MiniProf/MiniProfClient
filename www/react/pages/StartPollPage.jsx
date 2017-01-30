@@ -26,11 +26,12 @@ var StartPollPage = React.createClass({
 
     setInterval(()=>{
 
-      request.get(serverName + "PollResult.php")
-      .set('Accept', 'application/json')
+      request.get(serverName + "Poll/PollStats.php")
+      .send({ID:2})
       .end( (err,res)=>{
-        res.body = JSON.parse(res.text.substr(0,38));
-        console.log(res.body);
+        console.log(res);
+        debugger;
+        /*res.body = JSON.parse(res.text.substr(0,38));
         debugger;
         if(!err){
           this.setState({pieData:[
@@ -39,7 +40,7 @@ var StartPollPage = React.createClass({
             {name:"C",value:res.body.results.C},
             {name:"D",value:res.body.results.D}
           ]});
-        }
+        }*/
         // Remove the first point so we dont just add values forever
       });
 
