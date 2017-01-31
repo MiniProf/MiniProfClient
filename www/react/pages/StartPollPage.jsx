@@ -1,7 +1,8 @@
 var React  = require('react');
 var request = require('superagent');
 var TopBar = require('../components/TopBar');
-import {PieChart, Pie, Legend,Tooltip} from 'recharts';
+import {PieChart, Pie, Legend,Tooltip,Cell} from 'recharts';
+var inter;
 var StartPollPage = React.createClass({
   getInitialState:()=>{
     return {};
@@ -13,11 +14,12 @@ var StartPollPage = React.createClass({
     this.resize();
   },
   componentWillUnmount:function(){
+    clearInterval(inter);
     window.removeEventListener("resize", this.resize);
   },
   resize:function(){
     var width=$('body').width();
-    this.setState({width:width,height:width/3});
+    this.setState({width:width,height:width});
   },
 
   render:function(){
@@ -25,7 +27,8 @@ var StartPollPage = React.createClass({
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>
         <PieChart width={this.state.width} height={this.state.height}>
-          <Pie isAnimationActive={false} data={this.state.pieData} cx={200} cy={200} outerRadius={80} fill="#8884d8" label/>
+          <Pie isAnimationActive={false} data={this.state.pieData} cx={200} cy={200} outerRadius={80} fill="#8884d8">
+          </Pie>
           <Tooltip />
        </PieChart>
         <button className = "fluid ui button" style = {{margin:"10px 0px"}} onClick={this.resetAPI}> Reset </button>
@@ -35,21 +38,21 @@ var StartPollPage = React.createClass({
   componentDidMount:function(){
 
 
-    setInterval(()=>{
+    inter = setInterval(()=>{
 
-      request.get(serverName + "Poll/PollStats.php")
-      .send({ID:2})
+      request.get(serverName + "Poll/?ID=2")
+      .set('Accept', 'application/json')
       .end( (err,res)=>{
         console.log(res);
         debugger;
-        res.body = JSON.parse(res.text.substr(0,38));
+        //res.body = JSON.parse(res.text.substr(0,38));
         debugger;
         if(!err){
           this.setState({pieData:[
-            {name:"A",value:res.body.results.A},
-            {name:"B",value:res.body.results.B},
-            {name:"C",value:res.body.results.C},
-            {name:"D",value:res.body.results.D}
+            {name:"A",value:res.body.msg.Acount},
+            {name:"B",value:res.body.msg.Bcount},
+            {name:"C",value:res.body.msg.Ccount},
+            {name:"D",value:res.body.msg.Dcount}
           ]});
         }
         // Remove the first point so we dont just add values forever

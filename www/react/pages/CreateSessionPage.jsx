@@ -10,7 +10,7 @@ var CreateSessionPage = React.createClass({
           <br></br>
           <br></br>
           <br></br>
-          <input type="submit" />
+          <input type="submit" onClick={this.props.router.goto("/seshDashboard")}/>
     </div>
     )
   }
