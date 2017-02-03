@@ -11,8 +11,10 @@ var ReviewResponsesPage = React.createClass({
   },
   componentWillMount:function() {
     request.get(serverName + "Review/?SESSIONID=000000")
+	.set('Accept', 'application/json')
     .end((err,res)=>{
       var quotes = [];
+	  debugger;
       res.body.msg.map((item)=>{
         quotes.push({Quote:item});
       })

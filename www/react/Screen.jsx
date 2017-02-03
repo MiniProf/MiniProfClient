@@ -8,6 +8,7 @@ var ReviewResponsesPage = require('./pages/ReviewResponsesPage');
 var StartPollPage = require('./pages/StartPollPage');
 var LoginPage = require('./pages/Login');
 var SeshDashboard = require('./pages/seshDashboard');
+var Register = require('./pages/Register');
 
 
 const Screen = () =>(
@@ -21,6 +22,9 @@ const Screen = () =>(
         <ReviewResponsesPage path="/ReviewResponses" router={router}/>
         <StartPollPage path="/StartPollPage" router={router}/>
         <SeshDashboard path="/seshDashboard" router={router}/>
+        <LoginPage path="/login" router={router}/>
+        <Register path="/Register" router={router}/>
+
       </Router>
       {/*
       <div className="ui top attached demo menu">

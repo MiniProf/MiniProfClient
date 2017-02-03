@@ -12,6 +12,9 @@ var IndexPage = React.createClass({
       <a onClick={()=>{this.props.router.goto("/ReviewResponses");}}>
         <button className="ui button fluid homeButton">View Feedback</button>
       </a>
+      <a onClick={()=>{this.props.router.goto("/login");}}>
+        <button className="ui button fluid homeButton">login</button>
+      </a>
     </div>)
   }
 });
