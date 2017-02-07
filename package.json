@@ -9,7 +9,8 @@
   "keywords": [],
   "author": [
     "George Wilson",
-    "Muhammed Patel"
+    "Muhammed Patel",
+    "Duncan Martin"
   ],
   "license": "ISC",
   "devDependencies": {
