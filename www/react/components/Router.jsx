@@ -22,6 +22,12 @@ var router = {
     this.path = newPage;
     this.origin.forceUpdate();
   },
+  replaceHistory:function(newPage) {
+    debugger;
+    this.history = [];
+    this.path = newPage;
+    this.origin.forceUpdate();
+  },
   goBack:function(){
     debugger;
     if(this.history.length >0){

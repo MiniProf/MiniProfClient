@@ -10,7 +10,7 @@ var ReviewResponsesPage = React.createClass({
     return {};
   },
   componentWillMount:function() {
-    request.get(serverName + "Review/?SESSIONID=000000")
+    request.get(serverName + "Review/?SESSIONID=000000&TOKEN=68MRAVFENTP0JZ1J9KUWSBOD2TTNYPG5")
 	.set('Accept', 'application/json')
     .end((err,res)=>{
       var quotes = [];
@@ -22,8 +22,9 @@ var ReviewResponsesPage = React.createClass({
       this.setState({reviews:quotes});
       this.resize();
     });
-    request.get(serverName + "TLS/?SESSIONID=000000")
+    request.get(serverName + "TLS/?SESSIONID=000000&TOKEN=68MRAVFENTP0JZ1J9KUWSBOD2TTNYPG5")
     .end((err,res)=>{
+      debugger;
       this.setState({tls:res.body.msg});
       this.resize();
     });
@@ -47,8 +48,8 @@ var ReviewResponsesPage = React.createClass({
       return(
 
       <div id="lecReviews" >
-        <div style={{textAlign:"center"}} className='line-chart-wrapper'>
-          <LineChart width={this.state.width} height={this.state.height} data={this.state.tls}
+        <div style={{textAlign:"center",overflowX:"scroll",overflowY:"hidden",width:"100%"}} className='line-chart-wrapper'>
+          <LineChart width={this.state.width*4} height={this.state.height} data={this.state.tls}
           margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
           <XAxis dataKey="time" label="Time(mins)"/>
           <YAxis label="No. of students"/>

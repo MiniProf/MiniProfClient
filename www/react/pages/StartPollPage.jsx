@@ -31,6 +31,8 @@ var StartPollPage = React.createClass({
           </Pie>
           <Tooltip />
        </PieChart>
+       <br></br>
+       <a onClick={this.goBack}>	← Click to go back</a>
         <button className = "fluid ui button" style = {{margin:"10px 0px"}} onClick={this.resetAPI}> Reset </button>
       </div>
     )
