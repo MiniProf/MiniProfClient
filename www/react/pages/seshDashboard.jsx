@@ -9,18 +9,27 @@ var seshDashboard = React.createClass({
   getInitialState:()=>{
     return {};
   },
-  prompt:function() {
-     if (confirm("Are you sure?") == true) {
-         this.props.router.replaceHistory("/login");
-     }
- },
  request:function(){
-   request.get(serverName + "TLS/?SESSIONID=000000&TOKEN=68MRAVFENTP0JZ1J9KUWSBOD2TTNYPG5")
+   request.get(serverName + "TLS/?SESSIONID=000000" + "&" + token)
    .end((err,res)=>{
      debugger;
      this.setState({tls:res.body.msg});
      this.resize();
    });
+ },
+ /*server side broken*/
+ endSesh:function(){
+   request.post(serverName + "Sessions/endSession/?" + token)
+   .send({SESSIONID:sessionID})
+   .end((err,res)=>{
+     if(!err && !res.body.error){
+       debugger;
+       this.props.router.replaceHistory('/');
+     }
+     else{
+       alert("Error in ending session!");
+     }
+   })
  },
  componentWillMount:function(){
    this.request();
@@ -40,6 +49,7 @@ resize:function(){
   render:function(){
     return(
       <div id="lecReviewslive" >
+        <h2>Session ID:{window.sessionID}</h2>
         <div style={{textAlign:"center",overflowX:"auto",width:"100%"}} className='line-chart-wrapper'>
           <LineChart width={this.state.width*3} height={this.state.height} data={this.state.tls}
           margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
@@ -59,12 +69,10 @@ resize:function(){
       <a onClick={()=>{this.props.router.goto("/StartPollPage");}}>
         <button className="ui button fluid homeButton">Start Poll</button>
       </a>
-      <br></br>
-      <a onClick={this.prompt}>
-    <div className="ui icon button" data-tooltip="Sign out" data-position="bottom left" data-inverted="">
-      <i className="sign out icon" aria-hidden="true" ></i>
-    </div>
-    </a>
+  </div>
+  <br></br>
+  <div onClick={this.endSesh} style={{marginRight:"100px",fontSize:"1.5em"}} className="ui icon button" data-tooltip="End session" data-position="right" data-inverted="">
+    <i className="remove circle icon" aria-hidden="true" ></i>
   </div>
 </div>
     )

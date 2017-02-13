@@ -7,9 +7,6 @@ var StartPollPage = React.createClass({
   getInitialState:()=>{
     return {};
   },
-  resetAPI:function() {
-    request.get(serverName + "/PollReset.php").end((err,res)=>{});
-  },
   componentWillMount:function(){
     this.resize();
   },
@@ -32,8 +29,7 @@ var StartPollPage = React.createClass({
           <Tooltip />
        </PieChart>
        <br></br>
-       <a onClick={this.goBack}>	← Click to go back</a>
-        <button className = "fluid ui button" style = {{margin:"10px 0px"}} onClick={this.resetAPI}> Reset </button>
+        <button className = "fluid ui button"> Click to go back </button>
       </div>
     )
   },
