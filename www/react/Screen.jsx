@@ -17,12 +17,12 @@ const Screen = () =>(
       <Router router={router}>
         {/*<LoginPage path="/" router={router}/>
         <IndexPage path="/Index" router={router}/>*/}
-        <IndexPage path="/" router={router}/>
+        <IndexPage path="/indexdash" router={router}/>
         <CreateSessionPage path="/CreateSessionPage" router={router}/>
         <ReviewResponsesPage path="/ReviewResponses" router={router}/>
         <StartPollPage path="/StartPollPage" router={router}/>
         <SeshDashboard path="/seshDashboard" router={router}/>
-        <LoginPage path="/login" router={router}/>
+        <LoginPage path="/" router={router}/>
         <Register path="/Register" router={router}/>
 
       </Router>

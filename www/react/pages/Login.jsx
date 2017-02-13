@@ -15,7 +15,7 @@ var Login = React.createClass({
     .end((err,res)=>{
       if(res.body.error == false){
         token = res.body.msg.token;
-        this.props.router.replaceHistory("/");
+        this.props.router.replaceHistory("/indexdash");
       }
       else{
         alert("The username or password you have entered is incorrect. Please try again")

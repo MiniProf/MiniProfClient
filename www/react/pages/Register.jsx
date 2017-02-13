@@ -9,12 +9,22 @@ var Register = React.createClass({
     };
   },
   register:function(){
-    request.get(serverName + "Auth/Register/")
+    request.post(serverName + "Auth/Register/")
     .send({NAME:this.state.username,UNI:this.state.uni,PASSWORD:this.state.password})
     .end((err,res)=>{
       if(res.body.error == false){
         alert("You have successfully been registered")
-        {/*insert code for automatically logging the user in if they are registered*/}
+        request.post(serverName + "Auth/Login/")
+        .send({NAME:this.state.username,PASSWORD:this.state.password})
+        .end((err,res)=>{
+          if(res.body.error == false){
+            token = res.body.msg.token;
+            this.props.router.replaceHistory("/indexdash");
+          }
+          else{
+            alert("The username or password you have entered is incorrect. Please try again")
+          }
+        });
       }
       else{
         alert("Registration unsuccessful!\nPlease try again")

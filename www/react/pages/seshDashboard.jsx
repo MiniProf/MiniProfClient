@@ -9,8 +9,13 @@ var seshDashboard = React.createClass({
   getInitialState:()=>{
     return {};
   },
+  endprompt:function() {
+     if (confirm("Are you sure you want to end the session?") == true) {
+         this.endsesh();
+     }
+ },
  request:function(){
-   request.get(serverName + "TLS/?SESSIONID=000000" + "&" + token)
+   request.get(serverName + "TLS/?SESSIONID=000000" + "&" +"TOKEN="+ token)
    .end((err,res)=>{
      debugger;
      this.setState({tls:res.body.msg});
@@ -19,12 +24,13 @@ var seshDashboard = React.createClass({
  },
  /*server side broken*/
  endSesh:function(){
-   request.post(serverName + "Sessions/endSession/?" + token)
+   request.post(serverName + "Sessions/endSession/?" +"TOKEN="+ token)
+   .set({'content-type':"application/x-www-form-urlencoded"})
    .send({SESSIONID:sessionID})
    .end((err,res)=>{
      if(!err && !res.body.error){
        debugger;
-       this.props.router.replaceHistory('/');
+       this.props.router.replaceHistory('/indexdash');
      }
      else{
        alert("Error in ending session!");

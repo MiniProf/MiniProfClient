@@ -12,7 +12,7 @@ var ReviewResponsesPage = React.createClass({
     };
   },
   componentWillMount:function() {
-    request.get(serverName + "Review/?SESSIONID=000000" + "&" + token)
+    request.get(serverName + "Review/?SESSIONID=000000" + "&" +"TOKEN="+ token)
 	.set('Accept', 'application/json')
     .end((err,res)=>{
       var quotes = [];
@@ -24,7 +24,7 @@ var ReviewResponsesPage = React.createClass({
       this.setState({reviews:quotes});
       this.resize();
     });
-    request.get(serverName + "TLS/?SESSIONID=000000" + "&" + token)
+    request.get(serverName + "TLS/?SESSIONID=000000" + "&" +"TOKEN="+ token)
     .end((err,res)=>{
       debugger;
       this.setState({tls:res.body.msg});

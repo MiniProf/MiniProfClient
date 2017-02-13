@@ -7,7 +7,7 @@ var CreateSessionPage = React.createClass({
     return {seshName:""}
   },
   sessionInit:function(){
-    request.post(serverName + "Sessions/startSession/?" + token)
+    request.post(serverName + "Sessions/startSession/?" + "TOKEN="+ window.token)
     .send({NAME:this.state.seshName})
     .end((err,res)=>{
       if(!err && !res.body.error){
