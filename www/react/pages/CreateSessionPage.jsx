@@ -1,16 +1,38 @@
 var React  = require('react');
 var TopBar = require('../components/TopBar');
+var request = require('superagent');
+
 var CreateSessionPage = React.createClass({
+  getInitialState(){
+    return {seshName:""}
+  },
+  sessionInit:function(){
+    request.post(serverName + "Sessions/startSession/?" + "TOKEN="+ window.token)
+    .send({NAME:this.state.seshName})
+    .end((err,res)=>{
+      if(!err && !res.body.error){
+        debugger;
+        sessionID = res.body.msg.SESSIONID;
+        this.props.router.goto('/seshDashboard');
+      }
+      else{
+        alert("Error. Your session was not created!");
+      }
+    })
+  },
+  onchange:function(e){
+    this.setState({seshName:e.target.value});
+  },
   render:function(){
     return(
     <div id="sessionDetails">
         <br></br>
          <p style={{display:"inline-block", position:"relative"}}>Session Name:</p>
-         <input type="text" placeholder="Please name the session" />
+         <input type="text" value={this.state.seshName} onChange={this.onchange} placeholder="Please name the session" />
           <br></br>
           <br></br>
           <br></br>
-          <input type="submit" onClick={this.props.router.goto("/seshDashboard")}/>
+          <input type="submit" onClick={this.sessionInit}/>
     </div>
     )
   }

@@ -5,9 +5,9 @@
   border: 2px solid black;
   border-collapse: collapse;
 }
-#lecReviews .ReviewBlock:nth-child(odd){
+#responsePage #rev .ReviewBlock:nth-child(odd){
   background-color: #80ced6;
 }
-#lecReviews .ReviewBlock:nth-child(even){
+#responsePage #rev .ReviewBlock:nth-child(even){
   background-color: #f0f0f0;
 }

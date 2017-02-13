@@ -2,3 +2,17 @@
   width: 70%;
   margin: 0 auto;
 }
+
+#register {
+  width: 70%;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #0188e2;
+}
