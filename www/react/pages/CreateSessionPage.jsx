@@ -11,7 +11,6 @@ var CreateSessionPage = React.createClass({
     .send({NAME:this.state.seshName})
     .end((err,res)=>{
       if(!err && !res.body.error){
-        debugger;
         sessionID = res.body.msg.SESSIONID;
         this.props.router.goto('/seshDashboard');
       }

@@ -4,9 +4,9 @@ var ReactDOM  = require('react-dom');
 var ReviewBlock = React.createClass({
   render:function(){
     return (
-        <tr className="ReviewBlock">
-          <h3>"{this.props.item.Quote}"</h3>
-        </tr>
+        <div className="extra content" style={{textAlign:'center'}}>
+          <h2>"{this.props.item.Quote}"</h2>
+        </div>
   );
   }
 });

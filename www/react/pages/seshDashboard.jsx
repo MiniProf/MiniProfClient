@@ -17,7 +17,7 @@ var seshDashboard = React.createClass({
  request:function(){
    request.get(serverName + "TLS/?SESSIONID=000000" + "&" +"TOKEN="+ token)
    .end((err,res)=>{
-     debugger;
+     
      this.setState({tls:res.body.msg});
      this.resize();
    });
@@ -29,7 +29,7 @@ var seshDashboard = React.createClass({
    .send({SESSIONID:sessionID})
    .end((err,res)=>{
      if(!err && !res.body.error){
-       debugger;
+       
        this.props.router.replaceHistory('/indexdash');
      }
      else{

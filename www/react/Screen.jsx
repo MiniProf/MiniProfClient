@@ -19,10 +19,10 @@ const Screen = () =>(
         <IndexPage path="/Index" router={router}/>*/}
         <IndexPage path="/indexdash" router={router}/>
         <CreateSessionPage path="/CreateSessionPage" router={router}/>
-        <ReviewResponsesPage path="/ReviewResponses" router={router}/>
+        <ReviewResponsesPage path="/" router={router}/>
         <StartPollPage path="/StartPollPage" router={router}/>
         <SeshDashboard path="/seshDashboard" router={router}/>
-        <LoginPage path="/" router={router}/>
+        <LoginPage path="/s" router={router}/>
         <Register path="/Register" router={router}/>
 
       </Router>

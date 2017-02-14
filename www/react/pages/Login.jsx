@@ -23,7 +23,7 @@ var Login = React.createClass({
     })
   },
   textChange:function(name, e){
-    debugger;
+    
     var value = e.currentTarget.value;
     this.setState({[name]:value})
   },

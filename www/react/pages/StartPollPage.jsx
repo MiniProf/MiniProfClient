@@ -42,9 +42,9 @@ var StartPollPage = React.createClass({
       .set('Accept', 'application/json')
       .end( (err,res)=>{
         console.log(res);
-        debugger;
+        
         //res.body = JSON.parse(res.text.substr(0,38));
-        debugger;
+        
         if(!err){
           this.setState({pieData:[
             {name:"A",value:res.body.msg.Acount},

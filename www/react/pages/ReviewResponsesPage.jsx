@@ -8,25 +8,40 @@ var request = require('superagent');
 var ReviewResponsesPage = React.createClass({
   getInitialState:()=>{
     return {
-      showGraph: true
+      showGraph: true,
+      sessions:[],
+      currSessionID:null
     };
   },
   componentWillMount:function() {
-    request.get(serverName + "Review/?SESSIONID=000000" + "&" +"TOKEN="+ token)
-	.set('Accept', 'application/json')
+    request.get(serverName + "Sessions/getAllSessions/?" + "TOKEN=" + token)
+    .set('Accept', 'application/json')
+    .end((err,res)=>{
+      if(!err && !res.body.error){
+        var map = new Map();
+        res.body.msg.map((item)=>{
+          map.set(item.ID,item);
+        });
+      }
+        this.setState({sessions:map,currSessionID:res.body.msg[0].ID},this.getSessionData);
+    });
+  },
+  getSessionData:function(){
+    debugger;
+    request.get(serverName + "Review/?SESSIONID=" + this.state.currSessionID + "&" +"TOKEN="+ token)
+    .set('Accept', 'application/json')
     .end((err,res)=>{
       var quotes = [];
-	  debugger;
+
       res.body.msg.map((item)=>{
         quotes.push({Quote:item});
       })
-      debugger;
+
       this.setState({reviews:quotes});
       this.resize();
     });
-    request.get(serverName + "TLS/?SESSIONID=000000" + "&" +"TOKEN="+ token)
+    request.get(serverName + "TLS/?SESSIONID=" + this.state.currSessionID + "&" +"TOKEN="+ token)
     .end((err,res)=>{
-      debugger;
       this.setState({tls:res.body.msg});
       this.resize();
     });
@@ -41,18 +56,32 @@ var ReviewResponsesPage = React.createClass({
     var width=$('body').width();
     this.setState({width:width,height:width/3});
   },
+  onSessionSelect:function(e){
+    debugger;
+    this.setState({currSessionID:e.target.value},this.getSessionData);
+  },
   update:function(e){
     this.setState({showGraph:e})
   },
   render:function(){
-    if(this.state.reviews){
+    console.log(this.state.currSessionID);
+    if(this.state.reviews && this.state.tls){
       var reviews = this.state.reviews;
       var reviewBlocks = reviews.map((i,x)=>{
         return (<ReviewBlock item={i} key={x}/>)
       });
+      var sessions = [];
+      this.state.sessions.forEach((item)=>{
+        sessions.push(<option value={item.ID}>{item.Name}</option>);
+      });
       return(
-      <div id="responsePage" >
-      <div style={{width:"100%",borderStyle:"solid",backgroundColor:"#2185D0"}} className="large ui buttons">
+      <div id="responsePage" className="page">
+      <div style={{width:"100%"}} className="">
+        <select className="fluid ui dropdown" onChange={this.onSessionSelect} value={this.state.currSessionID}>
+        {sessions}
+        </select>
+      </div>
+      <div style={{width:"100%"}} className="large ui buttons">
         <button onClick={this.update.bind(this, true)} className={"ui button " + ((this.state.showGraph)?"active":"")}>Graph</button>
         <button onClick={this.update.bind(this, false)} className={"ui button " + ((!this.state.showGraph)?"active":"")}>Reviews</button>
       </div>
@@ -70,9 +99,9 @@ var ReviewResponsesPage = React.createClass({
         </LineChart>
         </div>
         <div id="rev" style={{display:(!this.state.showGraph)?"block":"none"}}>
-        <table style={{width:"100%"}}>
+        <div style={{marginLeft:'5%',width:'90%',marginTop:'2em'}} className="ui card">
             {reviewBlocks}
-        </table>
+        </div>
       </div>
     </div>
         );

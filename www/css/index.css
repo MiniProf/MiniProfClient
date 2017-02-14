@@ -6,6 +6,9 @@
     display: none !important;
   }
 }**/
+.page{
+  padding: 2em 0%;
+}
 /** IndexPage CSS**/
 #IndexPage .ui.button.fluid.homeButton{
   margin: 2vh auto;

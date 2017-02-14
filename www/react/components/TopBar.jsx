@@ -3,7 +3,7 @@ var ReactDOM  = require('react-dom');
 
 var TopBar = React.createClass({
   goBack:function(){
-    debugger;
+    
     this.props.router.goBack();
   },
   prompt:function() {
