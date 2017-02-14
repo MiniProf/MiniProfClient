@@ -20,15 +20,33 @@ var StartPollPage = React.createClass({
   },
 
   render:function(){
+    debugger;
+    var pieData = this.state.pieData || [
+      {name:"A",value:""},
+      {name:"B",value:""},
+      {name:"C",value:""},
+      {name:"D",value:""}];
     return(
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>
-        <PieChart width={this.state.width} height={this.state.height}>
-          <Pie isAnimationActive={false} data={this.state.pieData} cx={200} cy={200} outerRadius={80} fill="#8884d8">
-          </Pie>
-          <Tooltip />
-       </PieChart>
-       <br></br>
+        <table>
+        <tr>
+          <td>A</td>
+          <td>{pieData[0].value}</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>{pieData[1].value}</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>{pieData[2].value}</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>{pieData[3].value}</td>
+        </tr>
+        </table>
         <button className = "fluid ui button"> Click to go back </button>
       </div>
     )
@@ -38,13 +56,13 @@ var StartPollPage = React.createClass({
 
     inter = setInterval(()=>{
 
-      request.get(serverName + "Poll/?ID=2")
+      request.get(serverName + "Poll/?ID=3&TOKEN="+"68MRAVFENTP0JZ1J9KUWSBOD2TTNYPG5")
       .set('Accept', 'application/json')
       .end( (err,res)=>{
         console.log(res);
-        
+
         //res.body = JSON.parse(res.text.substr(0,38));
-        
+
         if(!err){
           this.setState({pieData:[
             {name:"A",value:res.body.msg.Acount},

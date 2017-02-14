@@ -14,7 +14,7 @@ var Login = React.createClass({
     .send({NAME:this.state.username,PASSWORD:this.state.password})
     .end((err,res)=>{
       if(res.body.error == false){
-        token = res.body.msg.token;
+        token = res.body.msg.Token;
         this.props.router.replaceHistory("/indexdash");
       }
       else{
@@ -23,7 +23,7 @@ var Login = React.createClass({
     })
   },
   textChange:function(name, e){
-    
+
     var value = e.currentTarget.value;
     this.setState({[name]:value})
   },
