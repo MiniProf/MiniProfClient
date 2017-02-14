@@ -42,7 +42,7 @@ var seshDashboard = React.createClass({
 },
 componentDidMount:function() {
  window.addEventListener("resize", this.resize);
- inter = setInterval(this.request, 100000);
+ inter = setInterval(this.request, 30000);
 },
 componentWillUnmount:function(){
  window.removeEventListener("resize", this.resize);
