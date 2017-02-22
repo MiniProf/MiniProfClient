@@ -2,6 +2,8 @@ var React = require('react');
 var Router = React.createClass({
   getInitialState:function(){
     this.props.router.origin = this;
+    //should call router.goBack() when the backbutton on the phone is pressed
+    document.addEventListener("backbutton", this.props.router.goBack, false);
     return {};
   },
   render:function(){
@@ -24,14 +26,12 @@ var router = {
     this.origin.forceUpdate();
   },
   replaceHistory:function(newPage) {
-
     this.history = [];
     this.path = newPage;
     this.topbar.forceUpdate();
     this.origin.forceUpdate();
   },
   goBack:function(){
-
     if(this.history.length >0){
       this.path = this.history[this.history.length - 1];
       this.history.pop();
