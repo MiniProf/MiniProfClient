@@ -2,25 +2,39 @@ var React  = require('react');
 var ReactDOM  = require('react-dom');
 
 var TopBar = React.createClass({
+  getInitialState(){
+    this.props.router.topbar = this;
+    return {};
+  },
   goBack:function(){
-
     this.props.router.goBack();
   },
-  prompt:function() {
+  signoutprompt:function() {
      if (confirm("Are you sure?") == true) {
        token = "";
        this.forceUpdate();
-         this.props.router.replaceHistory("/");
+      this.props.router.replaceHistory("/");
      }
- },
+  },
+  update:function(){
+    this.forceUpdate();
+  },
   render:function(){
+    debugger;
+    var canGoBack = (this.props.router.history.length > 0);
+
+    console.log("topbar renderring",token);
     return (<div id="TopBar" style={{height:"10vh",width:"100vw",textAlign:"center"}}>
-        <i className="chevron left icon" style={{float:"left",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.goBack}></i>
+        {(canGoBack)?
+          <i className="chevron left icon" style={{float:"left",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.goBack}></i>
+        :
+        null
+      }
         <h2 style={{display:"inline-block",position:"relative",top:"2.5vh",fontSize:"6vh"}}>{this.props.title}</h2>
         <h2 style={{display:"inline-block",position:"relative",top:"2.5vh",fontSize:"2.5em"}}>{this.props.title1}</h2>
         <i style={{marginLeft:"-129px", fontSize:"1.75em"}} className="student icon" />
         {( token != "" )?
-        <i className="sign out icon" aria-hidden="true" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.prompt}></i>
+        <i className="sign out icon" aria-hidden="true" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.signoutprompt}></i>
         :
         <i className="icon" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} ></i>
 

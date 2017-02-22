@@ -17,28 +17,32 @@ var router = {
   history:[],
   path:"/",
   goto:function(newPage) {
-    
     this.history.push(this.path);
     this.path = newPage;
+    debugger;
+    this.topbar.forceUpdate();
     this.origin.forceUpdate();
   },
   replaceHistory:function(newPage) {
-    
+
     this.history = [];
     this.path = newPage;
+    this.topbar.forceUpdate();
     this.origin.forceUpdate();
   },
   goBack:function(){
-    
+
     if(this.history.length >0){
       this.path = this.history[this.history.length - 1];
       this.history.pop();
+      this.topbar.forceUpdate();
       this.origin.forceUpdate();
     }
   },
   replace:function(path){
     this.path = path;
     this.history = [];
+    this.topbar.forceUpdate();
     this.origin.forceUpdate();
   }
 

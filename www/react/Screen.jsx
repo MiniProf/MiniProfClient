@@ -11,7 +11,9 @@ var SeshDashboard = require('./pages/seshDashboard');
 var Register = require('./pages/Register');
 
 
-const Screen = () =>(
+const Screen = () =>{
+  console.log(token);
+  return(
   <div>
       <TopBar router={router} title="Mini-Prof" title1="Teach"/>
       <Router router={router}>
@@ -58,4 +60,5 @@ const Screen = () =>(
   </div>
 </div>*/}
     </div>);
+  }
     module.exports = Screen;
