@@ -13,7 +13,7 @@ var CreateSessionPage = React.createClass({
     .end((err,res)=>{
       if(!err && !res.body.error){
         sessionID = res.body.msg.SESSIONID;
-        this.props.router.goto('/seshDashboard');
+        this.context.router.push('/seshDashboard');
       }
       else{
         alert("Error. Your session was not created!");

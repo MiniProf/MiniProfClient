@@ -1,5 +1,5 @@
 module.exports = {
-  entry:  './www/react/components.js',
+  entry:  './www/react/components',
   output: {
     path: '/www',
     filename: 'bundle.js'
@@ -15,6 +15,6 @@ module.exports = {
   },
   resolve: {
     // Allow require('./blah') to require blah.jsx
-    extensions: ['.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   }
 };

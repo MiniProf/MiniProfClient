@@ -19,7 +19,7 @@ var Register = React.createClass({
         .end((err,res)=>{
           if(res.body.error == false){
             token = res.body.msg.token;
-            this.props.router.replaceHistory("/indexdash");
+            this.context.router.replace("/indexdash");
           }
           else{
             alert("The username or password you have entered is incorrect. Please try again")

@@ -30,7 +30,7 @@ var seshDashboard = React.createClass({
    .end((err,res)=>{
      if(!err && !res.body.error){
 
-       this.props.router.replaceHistory('/indexdash');
+       this.context.router.replace('/indexdash');
      }
      else{
        alert("Error in ending session!");

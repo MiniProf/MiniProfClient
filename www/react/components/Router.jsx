@@ -1,18 +1,23 @@
 var React = require('react');
-var Router = React.createClass({
+var { Router, Route, Link, browserHistory } = require('react-router')
+var RRouter = React.createClass({
   getInitialState:function(){
-    this.props.router.origin = this;
     //should call router.goBack() when the backbutton on the phone is pressed
-    document.addEventListener("backbutton", this.props.router.goBack, false);
+    console.log(browserHistory);
     return {};
   },
   render:function(){
-    var page;
+    /*var page;
     this.props.children.map((child)=>{
       if(child.props.path == this.props.router.path)
         page = child;
-    });
-    return page;
+    });*/
+    console.log(<Router/>);
+    return (<Router history={browserHistory}>
+      {this.props.children.map((child,index)=>{
+        return (<Route path={child.props.path||"/"} component={child.type} key={index}/>)
+      })}
+    </Router>)
   }
 });
 var router = {
@@ -47,4 +52,4 @@ var router = {
   }
 
 };
-module.exports = {Router:Router,router:router};
+module.exports = {Router:RRouter,router:router};

@@ -3,7 +3,6 @@ var ReactDOM  = require('react-dom');
 
 var TopBar = React.createClass({
   getInitialState(){
-    this.props.router.topbar = this;
     return {};
   },
   goBack:function(){
@@ -13,15 +12,14 @@ var TopBar = React.createClass({
      if (confirm("Are you sure?") == true) {
        token = "";
        this.forceUpdate();
-      this.props.router.replaceHistory("/");
+      this.props.router.replace("/");
      }
   },
   update:function(){
     this.forceUpdate();
   },
   render:function(){
-    debugger;
-    var canGoBack = (this.props.router.history.length > 0);
+    var canGoBack = (0 > 0);
 
     console.log("topbar renderring",token);
     return (<div id="TopBar" style={{height:"10vh",width:"100vw",textAlign:"center"}}>

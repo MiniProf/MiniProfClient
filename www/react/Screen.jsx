@@ -15,17 +15,17 @@ const Screen = () =>{
   console.log(token);
   return(
   <div>
-      <TopBar router={router} title="Mini-Prof" title1="Teach"/>
-      <Router router={router}>
+      <TopBar title="Mini-Prof" title1="Teach"/>
+      <Router>
         {/*<LoginPage path="/" router={router}/>
         <IndexPage path="/Index" router={router}/>*/}
-        <IndexPage path="/indexdash" router={router}/>
-        <CreateSessionPage path="/CreateSessionPage" router={router}/>
-        <ReviewResponsesPage path="/ReviewResponses" router={router}/>
-        <StartPollPage path="/StartPollPage" router={router}/>
-        <SeshDashboard path="/seshDashboard" router={router}/>
-        <LoginPage path="/" router={router}/>
-        <Register path="/Register" router={router}/>
+        <IndexPage path="/indexdash"/>
+        <CreateSessionPage path="/CreateSessionPage"/>
+        <ReviewResponsesPage path="/ReviewResponses" />
+        <StartPollPage path="/StartPollPage"/>
+        <SeshDashboard path="/seshDashboard"/>
+        <LoginPage path="/"/>
+        <Register path="/Register"/>
 
       </Router>
       {/*
