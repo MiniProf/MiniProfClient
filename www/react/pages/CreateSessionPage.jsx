@@ -24,6 +24,7 @@ var CreateSessionPage = React.createClass({
     this.setState({seshName:e.target.value});
   },
   render:function(){
+    window.topbarRender();
     return(
     <div id="sessionDetails">
         <br></br>

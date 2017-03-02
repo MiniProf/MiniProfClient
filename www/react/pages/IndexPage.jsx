@@ -5,10 +5,11 @@ var IndexPage = React.createClass({
     history.pushState(null,null,location.href);
     window.onpopstate = function (event) {
       history.go(1);
-    };context
+    };
     return {};
   },
   render:function(){
+    window.topbarRender();
     return(<div id="IndexPage" className="page">
         <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/CreateSessionPage");}}>Create Session</button>
         <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/ReviewResponses");}}>View Feedback</button>

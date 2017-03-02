@@ -3,6 +3,7 @@ var ReactDOM  = require('react-dom');
 
 var TopBar = React.createClass({
   getInitialState(){
+    window.topbarRender = this.forceUpdate;
     return {};
   },
   goBack:function(){
@@ -35,7 +36,6 @@ var TopBar = React.createClass({
         <i className="sign out icon" aria-hidden="true" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.signoutprompt}></i>
         :
         <i className="icon" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} ></i>
-
         }
     </div>)
   }

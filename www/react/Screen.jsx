@@ -1,7 +1,6 @@
 var React  = require('react');
 var TopBar = require('./components/TopBar');
 var Router = require('./components/Router').Router;
-var router = require('./components/Router').router;
 var IndexPage = require('./pages/IndexPage');
 var CreateSessionPage = require('./pages/CreateSessionPage');
 var ReviewResponsesPage = require('./pages/ReviewResponsesPage');
@@ -15,7 +14,7 @@ const Screen = () =>{
   console.log(token);
   return(
   <div>
-      <TopBar title="Mini-Prof" title1="Teach"/>
+      <TopBar path="TOPSHIZ" title="Mini-Prof" title1="Teach"/>
       <Router>
         {/*<LoginPage path="/" router={router}/>
         <IndexPage path="/Index" router={router}/>*/}

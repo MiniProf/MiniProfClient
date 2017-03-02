@@ -8,9 +8,6 @@ var Login = React.createClass({
       password:""
     };
   },
-  contextTypes: {
-    router: React.PropTypes.object
-  },
   login:function(){
     request.post(serverName + "Auth/Login/")
     .set({'content-type':"application/x-www-form-urlencoded"})
@@ -20,7 +17,7 @@ var Login = React.createClass({
         token = res.body.msg.Token;
         //this.props.router.replaceHistory("/indexdash");
         console.log(this);
-        this.context.router.push("/indexdash")
+        this.context.router.replace("/indexdash")
       }
       else{
         alert("The username or password you have entered is incorrect. Please try again")
