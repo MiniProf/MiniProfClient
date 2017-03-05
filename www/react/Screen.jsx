@@ -8,17 +8,18 @@ var StartPollPage = require('./pages/StartPollPage');
 var LoginPage = require('./pages/Login');
 var SeshDashboard = require('./pages/seshDashboard');
 var Register = require('./pages/Register');
-
+var {browserHistory} = require('react-router');
 
 const Screen = () =>{
   console.log(token);
+  debugger;
   return(
   <div>
-      <TopBar path="TOPSHIZ" title="Mini-Prof" title1="Teach"/>
-      <Router>
+      <TopBar history={browserHistory} path="TOPSHIZ" title="Mini-Prof" title1="Teach"/>
+      <Router browserHistory={browserHistory}>
         {/*<LoginPage path="/" router={router}/>
         <IndexPage path="/Index" router={router}/>*/}
-        <IndexPage path="/indexdash"/>
+        <IndexPage path="/index"/>
         <CreateSessionPage path="/CreateSessionPage"/>
         <ReviewResponsesPage path="/ReviewResponses" />
         <StartPollPage path="/StartPollPage"/>

@@ -19,7 +19,7 @@ var Register = React.createClass({
         .end((err,res)=>{
           if(res.body.error == false){
             token = res.body.msg.token;
-            this.context.router.replace("/indexdash");
+            this.context.router.replace("/index");
           }
           else{
             alert("The username or password you have entered is incorrect. Please try again")
@@ -32,6 +32,8 @@ var Register = React.createClass({
     })
   },
   render:function(){
+    if(topbar)
+      topbar.forceUpdate();
     return(
       <div id="register">
         <form className="ui form segment">

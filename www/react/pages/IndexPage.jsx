@@ -9,7 +9,9 @@ var IndexPage = React.createClass({
     return {};
   },
   render:function(){
-    window.topbarRender();
+    if(topbar)
+      topbar.forceUpdate();
+      debugger;
     return(<div id="IndexPage" className="page">
         <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/CreateSessionPage");}}>Create Session</button>
         <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/ReviewResponses");}}>View Feedback</button>

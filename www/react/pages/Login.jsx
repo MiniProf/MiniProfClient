@@ -17,7 +17,7 @@ var Login = React.createClass({
         token = res.body.msg.Token;
         //this.props.router.replaceHistory("/indexdash");
         console.log(this);
-        this.context.router.replace("/indexdash")
+        this.context.router.replace("/index")
       }
       else{
         alert("The username or password you have entered is incorrect. Please try again")
@@ -30,6 +30,8 @@ var Login = React.createClass({
     this.setState({[name]:value})
   },
   render:function(){
+    if(topbar)
+      topbar.forceUpdate();
     return(
     <div id="Login" className="ui form" style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
       <div id="field" className="field">

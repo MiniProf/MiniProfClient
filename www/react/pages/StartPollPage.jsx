@@ -20,12 +20,13 @@ var StartPollPage = React.createClass({
   },
 
   render:function(){
-    debugger;
+    if(topbar)
+      topbar.forceUpdate();
     var pieData = this.state.pieData || [
-      {name:"A",value:""},
-      {name:"B",value:""},
-      {name:"C",value:""},
-      {name:"D",value:""}];
+      {name:"A",value:0},
+      {name:"B",value:0},
+      {name:"C",value:0},
+      {name:"D",value:0}];
     return(
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>

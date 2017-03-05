@@ -22,15 +22,14 @@ var seshDashboard = React.createClass({
      this.resize();
    });
  },
- /*server side broken*/
+ /*server side fixed*/
  endSesh:function(){
    request.post(serverName + "Sessions/endSession/?" +"TOKEN="+ token)
    .set({'content-type':"application/x-www-form-urlencoded"})
    .send({SESSIONID:sessionID})
    .end((err,res)=>{
      if(!err && !res.body.error){
-
-       this.context.router.replace('/indexdash');
+       this.context.router.replace('/index');
      }
      else{
        alert("Error in ending session!");
@@ -53,6 +52,8 @@ resize:function(){
  this.setState({width:width,height:width/3});
 },
   render:function(){
+    if(topbar)
+      topbar.forceUpdate();
     return(
       <div id="lecReviewslive" >
         <h2>Session ID:{window.sessionID}</h2>

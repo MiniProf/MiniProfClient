@@ -64,7 +64,8 @@ var ReviewResponsesPage = React.createClass({
     this.setState({showGraph:e})
   },
   render:function(){
-    console.log(this.state.currSessionID);
+    if(topbar)
+      topbar.forceUpdate();
     if(this.state.reviews && this.state.tls){
       var reviews = this.state.reviews;
       var reviewBlocks = reviews.map((i,x)=>{
