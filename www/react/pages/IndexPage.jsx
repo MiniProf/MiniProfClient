@@ -4,7 +4,7 @@ var IndexPage = React.createClass({
   getInitialState:()=>{
     history.pushState(null,null,location.href);
     window.onpopstate = function (event) {
-      history.go(1);
+      //history.go(1);
     };
     return {};
   },

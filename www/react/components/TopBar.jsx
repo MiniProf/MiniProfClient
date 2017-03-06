@@ -5,6 +5,7 @@ var TopBar = React.createClass({
   getInitialState(){
     debugger;
     topbar = this;
+    console.log(topbar);
     return {};
   },
   goBack:function(e){

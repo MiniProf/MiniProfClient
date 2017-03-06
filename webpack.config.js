@@ -1,7 +1,7 @@
 module.exports = {
   entry:  './www/react/components',
   output: {
-    path: '/www',
+    path: './www',
     filename: 'bundle.js'
   },
   module: {

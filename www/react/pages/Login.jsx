@@ -15,7 +15,6 @@ var Login = React.createClass({
     .end((err,res)=>{
       if(res.body.error == false){
         token = res.body.msg.Token;
-        //this.props.router.replaceHistory("/indexdash");
         console.log(this);
         this.context.router.replace("/index")
       }
