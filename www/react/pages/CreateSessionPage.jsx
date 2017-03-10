@@ -9,6 +9,7 @@ var CreateSessionPage = React.createClass({
   sessionInit:function(){
     debugger;
     request.post(serverName + "Sessions/startSession/?" + "TOKEN="+ token)
+    .type('form')
     .send({NAME:this.state.seshName})
     .end((err,res)=>{
       if(!err && !res.body.error){
@@ -16,7 +17,7 @@ var CreateSessionPage = React.createClass({
         this.context.router.push('/seshDashboard');
       }
       else{
-        alert("Error. Your session was not created!");
+        alert("Something has gone wrong, the session couldn't be created.");
       }
     })
   },
@@ -34,7 +35,7 @@ var CreateSessionPage = React.createClass({
           <br></br>
           <br></br>
           <br></br>
-          <input type="submit" onClick={this.sessionInit}/>
+          <input type="submit" onClick={()=>{this.sessionInit();}}/>
     </div>
     )
   }

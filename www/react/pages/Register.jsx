@@ -1,5 +1,6 @@
 var React  = require('react');
 var TopBar = require('../components/TopBar');
+var request = require('superagent');
 var Register = React.createClass({
   getInitialState:function(){
     return {
@@ -7,6 +8,11 @@ var Register = React.createClass({
       password:"",
       uni:""
     };
+  },
+  textChange:function(name, e){
+
+    var value = e.currentTarget.value;
+    this.setState({[name]:value})
   },
   register:function(){
     request.post(serverName + "Auth/Register/")
@@ -39,15 +45,15 @@ var Register = React.createClass({
         <form className="ui form segment">
         <div className="field">
           <label>Full Name: </label>
-          <input value={this.state.name} name="name" type="text" />
+          <input value={this.state.name} name="name"  onChange={this.textChange.bind(this,"name")} type="text" />
           </div>
           <div className="field">
             <label>Password</label>
-            <input value={this.state.password} type="password" name="PASSWORD" />
+            <input value={this.state.password} type="password"  onChange={this.textChange.bind(this,"password")} name="PASSWORD" />
           </div>
         <div className="field">
           <label>Please select an institution: </label>
-          <select value={this.state.uni} name="UNI" className="fluid ui dropdown">
+          <select value={this.state.uni} name="UNI" onChange={this.textChange.bind(this,"uni")} className="fluid ui dropdown">
             <option value="" disabled selected hidden>Please select an option</option>
             <option value="Lancaster">Lancaster University</option>
             <option value="Edgehill">Edgehill University</option>
@@ -59,7 +65,7 @@ var Register = React.createClass({
             <label>I agree to the terms and conditions</label>
           </div>
         </div>
-        <div className="ui primary submit button">Register</div>
+        <div className="ui primary submit button" onClick={this.register}>Register</div>
           <div className="ui error message"></div>
         </form>
     </div>

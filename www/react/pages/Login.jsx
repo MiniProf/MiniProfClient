@@ -31,9 +31,12 @@ var Login = React.createClass({
   render:function(){
     if(topbar)
       topbar.forceUpdate();
+      console.log(this);
     return(
     <div id="Login" className="ui form" style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
       <div id="field" className="field">
+        <br></br>
+        <br></br>
         Enter your username:
         <input value={this.state.username} onChange={this.textChange.bind(this,"username")} type="text" />
       </div>
@@ -47,9 +50,9 @@ var Login = React.createClass({
         <button className="ui primary submit button" onClick={this.login} >Sign in</button>
         <br></br>
         <br></br>
-        <a>Click here</a> to reset your username or password
+        <a>Forgot your Username and Password?</a>
         <br></br>
-        Not registered? <a onClick={()=>{this.props.router.goto("/Register");}}>Click here</a> to register
+        Not registered? <a onClick={()=>{this.context.router.push("/Register");}}>Register here!</a>
     </div>
     )
   }

@@ -15,7 +15,7 @@ const Screen = () =>{
   debugger;
   return(
   <div>
-      <TopBar history={hashHistory} path="TOPSHIZ" title="Mini-Prof" title1="Teach"/>
+      <TopBar history={hashHistory} path="TOPSHIZ" title="Mini-Prof"/>
       <Router browserHistory={hashHistory}>
         {/*<LoginPage path="/" router={router}/>
         <IndexPage path="/Index" router={router}/>*/}

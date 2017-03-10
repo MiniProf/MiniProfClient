@@ -17,7 +17,6 @@ var seshDashboard = React.createClass({
  request:function(){
    request.get(serverName + "TLS/?SESSIONID=" + window.sessionID + "&" +"TOKEN="+ token)
    .end((err,res)=>{
-
      this.setState({tls:res.body.msg});
      this.resize();
    });
@@ -49,16 +48,17 @@ componentWillUnmount:function(){
 },
 resize:function(){
  var width=$('body').width();
- this.setState({width:width,height:width/3});
+ this.setState({width:width/1.5,height:width/3});
 },
   render:function(){
     if(topbar)
       topbar.forceUpdate();
     return(
       <div id="lecReviewslive" >
-        <h2>Session ID:{window.sessionID}</h2>
+        <br></br>
+        <h2 style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>Session ID: {window.sessionID}</h2>
         <div style={{textAlign:"center",overflowX:"auto",width:"100%"}} className='line-chart-wrapper'>
-          <LineChart width={this.state.width*3} height={this.state.height} data={this.state.tls}
+          <LineChart width={this.state.width} height={this.state.height} data={this.state.tls}
           margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
           <XAxis dataKey="time" label="Time(mins)"/>
           <YAxis label="No. of students"/>
@@ -72,15 +72,20 @@ resize:function(){
         </div>
         <br></br>
 
-    <div>
+    <div style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
       <a onClick={()=>{this.props.router.goto("/StartPollPage");}}>
-        <button className="ui button fluid homeButton">Start Poll</button>
+        <button className="ui green primary submit button">Start Poll</button>
+      </a>
+      <br></br>
+      <br></br>
+      <a onClick={this.endSesh}>
+        <button className="ui red button">End Session</button>
       </a>
   </div>
   <br></br>
-  <div onClick={this.endSesh} style={{marginRight:"100px",fontSize:"1.5em"}} className="ui icon button" data-tooltip="End session" data-position="right" data-inverted="">
+{/*}  <div onClick={this.endSesh} style={{marginRight:"100px",fontSize:"1.5em"}} className="ui icon button" data-tooltip="End session" data-position="right" data-inverted="">
     <i className="remove circle icon" aria-hidden="true" ></i>
-  </div>
+  </div>*/}
 </div>
     )
   }

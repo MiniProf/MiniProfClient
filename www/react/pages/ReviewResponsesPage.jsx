@@ -54,7 +54,7 @@ var ReviewResponsesPage = React.createClass({
   },
   resize:function(){
     var width=$('body').width();
-    this.setState({width:width,height:width/3});
+    this.setState({width:width/1.5,height:width/4});
   },
   onSessionSelect:function(e){
     debugger;
@@ -87,7 +87,7 @@ var ReviewResponsesPage = React.createClass({
         <button onClick={this.update.bind(this, false)} className={"ui button " + ((!this.state.showGraph)?"active":"")}>Reviews</button>
       </div>
         <div id="lecReviews" style={{textAlign:"center",overflowX:"scroll",overflowY:"hidden",width:"100%",display:(this.state.showGraph)?"block":"none"}} className='line-chart-wrapper'>
-          <LineChart width={this.state.width*4} height={this.state.height} data={this.state.tls}
+          <LineChart width={this.state.width*2} height={this.state.height} data={this.state.tls}
           margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
           <XAxis dataKey="time" label="Time(mins)"/>
           <YAxis label="No. of students"/>

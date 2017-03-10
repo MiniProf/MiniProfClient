@@ -13,8 +13,8 @@ var IndexPage = React.createClass({
       topbar.forceUpdate();
       debugger;
     return(<div id="IndexPage" className="page">
-        <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/CreateSessionPage");}}>Create Session</button>
-        <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/ReviewResponses");}}>View Feedback</button>
+        <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/CreateSessionPage");}}>Create New Session</button>
+        <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/ReviewResponses");}}>View Session History</button>
         {/* <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/login");}}>login</button>
         <button className="ui button fluid homeButton" onClick={()=>{this.context.router.push("/seshDashboard");}}>seshDashboard</button> */}
     </div>)
