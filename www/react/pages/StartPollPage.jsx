@@ -5,6 +5,11 @@ import {PieChart, Pie, Legend,Tooltip,Cell} from 'recharts';
 var inter;
 var StartPollPage = React.createClass({
   getInitialState:()=>{
+    request.post(serverName + "Poll/Create/?SESSIONID="+sessionID+"&TOKEN="+ token)
+    .set({'content-type':"application/x-www-form-urlencoded"})
+    .send({'SESSIONID':sessionID})
+    .set('Accept', 'application/json')
+    .end( (err,res)=>{})
     return {};
   },
   componentWillMount:function(){
@@ -48,7 +53,7 @@ var StartPollPage = React.createClass({
           <td>{pieData[3].value}</td>
         </tr>
         </table>
-        <button className = "fluid ui button"> Click to go back </button>
+        <button className = "fluid ui button" onClick={this.context.router.goBack}> Click to go back </button>
       </div>
     )
   },
@@ -56,8 +61,8 @@ var StartPollPage = React.createClass({
 
 
     inter = setInterval(()=>{
-
-      request.get(serverName + "Poll/?ID=3&TOKEN="+"68MRAVFENTP0JZ1J9KUWSBOD2TTNYPG5")
+      console.log(sessionID);
+      request.get(serverName + "Poll/?SESSIONID="+sessionID+"&TOKEN="+ token)
       .set('Accept', 'application/json')
       .end( (err,res)=>{
         console.log(res);

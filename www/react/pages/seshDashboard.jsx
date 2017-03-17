@@ -73,7 +73,7 @@ resize:function(){
         <br></br>
 
     <div style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
-      <a onClick={()=>{this.props.router.goto("/StartPollPage");}}>
+      <a onClick={()=>{this.context.router.push("/StartPollPage");}}>
         <button className="ui green primary submit button">Start Poll</button>
       </a>
       <br></br>

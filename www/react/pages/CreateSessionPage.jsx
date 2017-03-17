@@ -12,7 +12,9 @@ var CreateSessionPage = React.createClass({
     .type('form')
     .send({NAME:this.state.seshName})
     .end((err,res)=>{
-      if(!err && !res.body.error){
+      console.log(err);
+      debugger;
+      if(!err){
         sessionID = res.body.msg.SESSIONID;
         this.context.router.push('/seshDashboard');
       }
