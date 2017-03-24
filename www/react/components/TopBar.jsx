@@ -16,6 +16,7 @@ var TopBar = React.createClass({
   signoutprompt:function() {
      if (confirm("Sign Out? Are you sure?") == true) {
        token = "";
+       window.localStorage.removeItem("tokenCK");
        this.forceUpdate();
        console.log(this.props.history);
        this.props.history.replace('/');

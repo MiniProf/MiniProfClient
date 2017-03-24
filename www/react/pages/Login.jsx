@@ -15,6 +15,8 @@ var Login = React.createClass({
     .end((err,res)=>{
       if(res.body.error == false){
         token = res.body.msg.Token;
+        debugger;
+        this.props.logindets();
         console.log(this);
         this.context.router.replace("/index")
       }
@@ -27,6 +29,14 @@ var Login = React.createClass({
 
     var value = e.currentTarget.value;
     this.setState({[name]:value})
+  },
+  autosubmit:function(e){
+    if(e.which === 13){
+      this.login(this.state.text)
+    }
+    else{
+      return false;
+    }
   },
   render:function(){
     if(topbar)
@@ -44,7 +54,7 @@ var Login = React.createClass({
         <br></br>
         <div id="field" className="field">
         Enter your password:
-        <input value={this.state.password} onChange={this.textChange.bind(this,"password")} type="password" />
+        <input value={this.state.password} onChange={this.textChange.bind(this,"password")} type="password" onKeyPress={this.autosubmit} />
       </div>
         <br></br>
         <button className="ui primary submit button" onClick={this.login} >Sign in</button>

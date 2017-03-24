@@ -10,55 +10,47 @@ var SeshDashboard = require('./pages/seshDashboard');
 var Register = require('./pages/Register');
 var {hashHistory} = require('react-router');
 
-const Screen = () =>{
-  console.log(token);
-  debugger;
-  return(
-  <div>
-      <TopBar history={hashHistory} path="TOPSHIZ" title="Mini-Prof"/>
-      <Router browserHistory={hashHistory}>
-        {/*<LoginPage path="/" router={router}/>
-        <IndexPage path="/Index" router={router}/>*/}
-        <IndexPage path="/index"/>
-        <CreateSessionPage path="/CreateSessionPage"/>
-        <ReviewResponsesPage path="/ReviewResponses" />
-        <StartPollPage path="/StartPollPage"/>
-        <SeshDashboard path="/seshDashboard"/>
-        <LoginPage path="/"/>
-        <Register path="/Register"/>
-
-      </Router>
-      {/*
-      <div className="ui top attached demo menu">
-  <a  className="item">
-    <i className="sidebar icon"></i>
-    Menu
-  </a>
-</div>
-<div className="ui bottom attached segment pushable">
-  <div className="ui inverted labeled icon left inline vertical sidebar menu">
-    <a className="item">
-      <i className="home icon"></i>
-    </a>
-      Home
-    <a className="item">
-      <i className="block layout icon"></i>
-      Topics
-    </a>
-    <a className="item">
-      <i className="smile icon"></i>
-      Friends
-    </a>
-    <a className="item">
-      <i className="calendar icon"></i>
-      History
-    </a>
-  </div>
-  <div className="pusher">
-    <div className="ui basic segment">
-    </div>
-  </div>
-</div>*/}
-    </div>);
+var Screen = React.createClass({
+  getInitialState:function(){
+    if(window.localStorage.getItem("tokenCK") != null){
+      return{token:window.localStorage.getItem("tokenCK")};
+    }
+    return{
+      SessionCode:window.localStorage.getItem("sessionCode")
+    };
+},
+componentDidMount:function(){
+    if(window.localStorage.getItem("tokenCK") != null){
+      router.push("/index");
+    }
+    else if(window.localStorage.getItem("sessionCode") != null){
+        router.push("/seshDashboard");
+    }
+},
+  logindets:function(){
+    window.localStorage.setItem("tokenCK",token);
+    this.setState({token:token});
+  },
+  seshDets:function(){
+    window.localStorage.setItem("sessionCode",sessionID);
+    this.setState({sessionCode:sessionID});
+  },
+  render:function(){
+    return(
+    <div>
+        <TopBar history={hashHistory} path="TOPSHIZ" title="Mini-Prof"/>
+        <Router browserHistory={hashHistory}>
+          {/*<LoginPage path="/" router={router}/>
+          <IndexPage path="/Index" router={router}/>*/}
+          <IndexPage path="/index"/>
+          <CreateSessionPage path="/CreateSessionPage" seshDets={this.seshDets} />
+          <ReviewResponsesPage path="/ReviewResponses" />
+          <StartPollPage path="/StartPollPage"/>
+          <SeshDashboard path="/seshDashboard"/>
+          <LoginPage path="/" logindets={this.logindets}/>
+          <Register path="/Register"/>
+        </Router>
+      </div>);
   }
-    module.exports = Screen;
+});
+module.exports = Screen;

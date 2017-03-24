@@ -7,6 +7,9 @@ var inter;
 
 var seshDashboard = React.createClass({
   getInitialState:()=>{
+    if(window.localStorage.getItem("sessionCode") != null){
+      window.sessionID = window.localStorage.getItem("sessionCode");
+    }
     return {};
   },
   endprompt:function() {
@@ -29,6 +32,8 @@ var seshDashboard = React.createClass({
    .end((err,res)=>{
      if(!err && !res.body.error){
        this.context.router.replace('/index');
+       window.localStorage.removeItem("sessionCode");
+       sessionID="";
      }
      else{
        alert("Error in ending session!");

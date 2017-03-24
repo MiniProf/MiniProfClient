@@ -9,11 +9,11 @@ var RRouter = React.createClass({
     console.log("yo");
     return (<Router history={this.props.browserHistory}>
       {this.props.children.map((child,index)=>{
-        var cType = child.type;
-        cType.contextTypes = {
+        var CType = child.type;
+        CType.contextTypes = {
           router: React.PropTypes.object
         };
-        return (<Route path={child.props.path||"/"} component={cType} key={index}/>)
+        return (<Route path={child.props.path||"/"} component={()=> (<CType {...child.props} />)} key={index}/>)
       })}
     </Router>)
   },

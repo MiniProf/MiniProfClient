@@ -35,6 +35,9 @@ var StartPollPage = React.createClass({
     return(
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>
+        {/* <PieChart width={800} height={400}>
+        <Pie data={pieData} cx={200} cy={200} outerRadius={60} fill="#8884d8"/>
+       </PieChart> */}
         <table>
         <tr>
           <td>A</td>
