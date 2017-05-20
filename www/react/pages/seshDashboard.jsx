@@ -1,16 +1,34 @@
 var React  = require('react');
 var TopBar = require('../components/TopBar');
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine,
-  ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar } from 'recharts';
+  ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, BarChart, Bar } from 'recharts';
 var request = require('superagent');
 var inter;
 
+var TooSlowVariable;
+var TooFastVariable;
+var ConfusedVariable;
+const barData = [
+    {name: 'Problems',  TooSlow: parseInt(TooSlowVariable),
+                        TooFast: parseInt(TooFastVariable),
+                        Confused: parseInt(ConfusedVariable)},  ];
+
 var seshDashboard = React.createClass({
+  incrementCount: function(){
+    this.setState({
+      TooSlowVariable: this.state.TooSlowVariable + 1
+    });
+  },
+
   getInitialState:()=>{
     if(window.localStorage.getItem("sessionCode") != null){
       window.sessionID = window.localStorage.getItem("sessionCode");
     }
-    return {};
+    return {
+      TooSlowVariable:0,
+      TooFastVariable:0,
+      ConfusedVariable:0
+    };
   },
   endprompt:function() {
      if (confirm("Are you sure you want to end the session?") == true) {
@@ -44,6 +62,7 @@ var seshDashboard = React.createClass({
    this.request();
 },
 componentDidMount:function() {
+  this.resize;
  window.addEventListener("resize", this.resize);
  inter = setInterval(this.request, 30000);
 },
@@ -62,22 +81,29 @@ resize:function(){
       <div id="lecReviewslive" >
         <br></br>
         <h2 style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>Session ID: {window.sessionID}</h2>
-        <div style={{textAlign:"center",overflowX:"auto",width:"100%"}} className='line-chart-wrapper'>
-          <LineChart width={this.state.width} height={this.state.height} data={this.state.tls}
-          margin={{ top: 5, right: 50, left: 20, bottom: 45 }}>
-          <XAxis dataKey="time" label="Time(mins)"/>
-          <YAxis label="No. of students"/>
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="TooFast" stroke="#8884d8" />
-          <Line type="monotone" dataKey="TooSlow" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="NeedHelp" stroke="#f2a73e" />
-        </LineChart>
+        <br></br>
+        <div style={{textAlign:"center",overflowX:"auto",width:"100%",}} className='bar-chart-wrapper'>
+        	<BarChart  style = {{margin:'0 auto'}} width={this.state.width} layout="vertical" height={this.state.height} data={[
+              {name: 'Problems',  TooSlow: parseInt(this.state.TooSlowVariable),
+                                  TooFast: parseInt(this.state.TooFastVariable),
+                                  Confused: parseInt(this.state.ConfusedVariable)},  ]}>
+           <XAxis type = "number" />
+           <YAxis type = "category" dataKey = "name" />
+           <CartesianGrid strokeDasharray="3 3"/>
+           <Tooltip/>
+           <Legend />
+           <Bar isAnimationActive = {false} dataKey="TooSlow" fill="#0ABBE2" />
+           <Bar isAnimationActive = {false} dataKey="TooFast" fill="#FF0000" />
+           <Bar isAnimationActive = {false} dataKey="Confused" fill="#7D0BB6" />
+          </BarChart>
         </div>
         <br></br>
 
+
     <div style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
+      <a onClick={this.incrementCount}>
+        <button className="ui green button">count</button>
+      </a>
       <a onClick={()=>{this.context.router.push("/StartPollPage");}}>
         <button className="ui green primary submit button">Start Poll</button>
       </a>

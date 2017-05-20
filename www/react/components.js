@@ -5,4 +5,4 @@ var ReactDOM  = require('react-dom');
 $(document).ready(
   function(){
     ReactDOM.render(React.createElement(Screen,{}),document.getElementById('app'));
-  });
+});
