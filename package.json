@@ -32,6 +32,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "react-toolbox": "^1.2.5",
     "recharts": "^0.20.5",
+    "socket.io": "^2.0.1",
     "superagent": "^2.3.0"
   }
 }

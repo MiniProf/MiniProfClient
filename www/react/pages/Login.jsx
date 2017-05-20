@@ -15,7 +15,7 @@ var Login = React.createClass({
     .end((err,res)=>{
       if(res.body.error == false){
         token = res.body.msg.Token;
-        debugger;
+
         this.props.logindets();
         console.log(this);
         this.context.router.replace("/index")

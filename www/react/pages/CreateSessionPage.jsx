@@ -7,15 +7,15 @@ var CreateSessionPage = React.createClass({
     return {seshName:""}
   },
   sessionInit:function(){
-    debugger;
+
     request.post(serverName + "Sessions/startSession/?" + "TOKEN="+ token)
     .type('form')
     .send({NAME:this.state.seshName})
     .end((err,res)=>{
       console.log(err);
-      debugger;
+
       if(!err){
-        debugger;
+         
         sessionID = res.body.msg.SESSIONID;
         this.props.seshDets();
         this.context.router.push('/seshDashboard');

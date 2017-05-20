@@ -1,33 +1,20 @@
 var React  = require('react');
 var TopBar = require('../components/TopBar');
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine,
-  ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, BarChart, Bar } from 'recharts';
+import {  ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine,
+          ReferenceDot, Tooltip, CartesianGrid, Legend, Brush, ErrorBar, BarChart, Bar } from 'recharts';
 var request = require('superagent');
 var inter;
-
-var TooSlowVariable;
-var TooFastVariable;
-var ConfusedVariable;
-const barData = [
-    {name: 'Problems',  TooSlow: parseInt(TooSlowVariable),
-                        TooFast: parseInt(TooFastVariable),
-                        Confused: parseInt(ConfusedVariable)},  ];
-
+var io = require("socket.io-client");
 var seshDashboard = React.createClass({
-  incrementCount: function(){
-    this.setState({
-      TooSlowVariable: this.state.TooSlowVariable + 1
-    });
-  },
 
   getInitialState:()=>{
     if(window.localStorage.getItem("sessionCode") != null){
       window.sessionID = window.localStorage.getItem("sessionCode");
     }
     return {
-      TooSlowVariable:0,
-      TooFastVariable:0,
-      ConfusedVariable:0
+      TF:0,
+      TS:0,
+      NH:0
     };
   },
   endprompt:function() {
@@ -59,7 +46,31 @@ var seshDashboard = React.createClass({
    })
  },
  componentWillMount:function(){
-   this.request();
+   this.request();var socket = io("http://sccug-mini-prof.lancs.ac.uk:8000")
+   socket.on('connect', (client) => {
+     debugger;
+       socket.emit("init", {tableName:"MP_TLS",value:sessionID});
+       socket.on("message", (msg) => {
+         console.log(msg);
+         debugger;
+         if (msg.clicked == "TF") {
+           this.incrementCount("TF");
+           return;
+         }
+         else if (msg.clicked == "TS") {
+           this.incrementCount("TS");
+           return;
+         }else if (msg.clicked == "NH") {
+           this.incrementCount("NH");
+           return;
+         }
+       });
+   });
+},
+incrementCount:function(a){
+  this.setState({
+    [a]:this.state[a] +1
+  });
 },
 componentDidMount:function() {
   this.resize;
@@ -84,9 +95,9 @@ resize:function(){
         <br></br>
         <div style={{textAlign:"center",overflowX:"auto",width:"100%",}} className='bar-chart-wrapper'>
         	<BarChart  style = {{margin:'0 auto'}} width={this.state.width} layout="vertical" height={this.state.height} data={[
-              {name: 'Problems',  TooSlow: parseInt(this.state.TooSlowVariable),
-                                  TooFast: parseInt(this.state.TooFastVariable),
-                                  Confused: parseInt(this.state.ConfusedVariable)},  ]}>
+              {name: 'Problems',  TooSlow: parseInt(this.state.TS),
+                                  TooFast: parseInt(this.state.TF),
+                                  Confused: parseInt(this.state.NH)},  ]}>
            <XAxis type = "number" />
            <YAxis type = "category" dataKey = "name" />
            <CartesianGrid strokeDasharray="3 3"/>

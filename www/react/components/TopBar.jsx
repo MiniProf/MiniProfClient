@@ -3,14 +3,12 @@ var ReactDOM  = require('react-dom');
 
 var TopBar = React.createClass({
   getInitialState(){
-    debugger;
     topbar = this;
     console.log(topbar);
     return {};
   },
   goBack:function(e){
     e.preventDefault();
-    debugger;
     this.props.history.goBack();
   },
   signoutprompt:function() {
@@ -29,7 +27,6 @@ var TopBar = React.createClass({
   render:function(){
     var path = this.props.history.getCurrentLocation().pathname
     var canGoBack = (path != "/" && path != "/index");
-    debugger;
     console.log("topbar renderring",token);
     return (<div id="TopBar" style={{height:"10vh",width:"100vw",textAlign:"center", background:"red"}}>
         {(canGoBack)?

@@ -1,19 +1,35 @@
 var React  = require('react');
 var request = require('superagent');
 var TopBar = require('../components/TopBar');
+var io = require("socket.io-client");
 import {PieChart, Pie, Legend,Tooltip,Cell} from 'recharts';
 var inter;
 var StartPollPage = React.createClass({
-  getInitialState:()=>{
-    request.post(serverName + "Poll/Create/?SESSIONID="+sessionID+"&TOKEN="+ token)
-    .set({'content-type':"application/x-www-form-urlencoded"})
-    .send({'SESSIONID':sessionID})
-    .set('Accept', 'application/json')
-    .end( (err,res)=>{})
-    return {};
+  getInitialState:function(){
+    request.post(serverName + "Poll/Create/?TOKEN=" + token)
+    .set({'content-type':'application/x-www-form-urlencoded'})
+    .send({"SESSIONID":sessionID}).end((er,res)=>{console.log(res);});
+    return {pieData:[
+      {name:"A",value:0},
+      {name:"B",value:0},
+      {name:"C",value:0},
+      {name:"D",value:0}]};
   },
   componentWillMount:function(){
-    this.resize();
+    var socket = io("http://sccug-mini-prof.lancs.ac.uk:8000")
+    socket.on('connect', (client) => {
+      debugger;
+        socket.emit("init", {tableName:"MP_Questions",value:"dc"});
+        socket.on("message", (msg) => {
+          console.log(msg);
+          debugger;
+          var newData = [{name:"A",value:msg.Acount},
+                {name:"B",value:msg.Bcount},
+                {name:"C",value:msg.Ccount},
+                {name:"D",value:msg.Dcount}];
+          this.setState({pieData:newData});
+        });
+    });
   },
   componentWillUnmount:function(){
     clearInterval(inter);
@@ -32,12 +48,11 @@ var StartPollPage = React.createClass({
       {name:"B",value:0},
       {name:"C",value:0},
       {name:"D",value:0}];
+      debugger;
     return(
       <div>
         <div id="myChart" style={{width:"100%",height:"100%"}}></div>
-        {/* <PieChart width={800} height={400}>
-        <Pie data={pieData} cx={200} cy={200} outerRadius={60} fill="#8884d8"/>
-       </PieChart> */}
+
         <table>
         <tr>
           <td>A</td>
@@ -61,29 +76,6 @@ var StartPollPage = React.createClass({
     )
   },
   componentDidMount:function(){
-
-
-    inter = setInterval(()=>{
-      console.log(sessionID);
-      request.get(serverName + "Poll/?SESSIONID="+sessionID+"&TOKEN="+ token)
-      .set('Accept', 'application/json')
-      .end( (err,res)=>{
-        console.log(res);
-
-        //res.body = JSON.parse(res.text.substr(0,38));
-
-        if(!err){
-          this.setState({pieData:[
-            {name:"A",value:res.body.msg.Acount},
-            {name:"B",value:res.body.msg.Bcount},
-            {name:"C",value:res.body.msg.Ccount},
-            {name:"D",value:res.body.msg.Dcount}
-          ]});
-        }
-        // Remove the first point so we dont just add values forever
-      });
-
-    },200);
     window.addEventListener("resize", this.resize);
   }
 });
