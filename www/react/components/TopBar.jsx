@@ -36,7 +36,7 @@ var TopBar = React.createClass({
       }
         <h2 style={{display:"inline-block",position:"relative",top:"2.5vh",fontSize:"6vh"}}>{this.props.title}</h2>
       {/*  <i style={{marginLeft:"-129px", fontSize:"1.75em"}} className="student icon" /> */}
-        {( token != "" )?
+        {( window.localStorage.getItem("tokenCK") )?
         <i className="sign out icon" aria-hidden="true" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} onClick={this.signoutprompt}></i>
         :
         <i className="icon" style={{float:"right",fontSize:"7vh",width:"5%",display:"inline-block",cursor:"pointer"}} ></i>
