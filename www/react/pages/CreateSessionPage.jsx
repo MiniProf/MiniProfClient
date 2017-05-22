@@ -15,7 +15,7 @@ var CreateSessionPage = React.createClass({
       console.log(err);
 
       if(!err){
-         
+
         sessionID = res.body.msg.SESSIONID;
         this.props.seshDets();
         this.context.router.push('/seshDashboard');
