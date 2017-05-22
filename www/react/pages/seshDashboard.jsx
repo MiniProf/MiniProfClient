@@ -35,6 +35,7 @@ var seshDashboard = React.createClass({
    .set({'content-type':"application/x-www-form-urlencoded"})
    .send({SESSIONID:sessionID})
    .end((err,res)=>{
+     debugger;
      if(!err && !res.body.error){
        this.context.router.replace('/index');
        window.localStorage.removeItem("sessionCode");
@@ -46,7 +47,8 @@ var seshDashboard = React.createClass({
    })
  },
  componentWillMount:function(){
-   this.request();var socket = io("http://sccug-mini-prof.lancs.ac.uk:8000")
+   this.request();
+   var socket = io("http://sccug-mini-prof.lancs.ac.uk:8000")
    socket.on('connect', (client) => {
      debugger;
        socket.emit("init", {tableName:"MP_TLS",value:sessionID});
@@ -97,24 +99,21 @@ resize:function(){
         	<BarChart  style = {{margin:'0 auto'}} width={this.state.width} layout="vertical" height={this.state.height} data={[
               {name: 'Problems',  TooSlow: parseInt(this.state.TS),
                                   TooFast: parseInt(this.state.TF),
-                                  Confused: parseInt(this.state.NH)},  ]}>
-           <XAxis type = "number" />
+                                  Confused: parseInt(this.state.NH)}]}>
+           <XAxis type = "number" domain = {[0,20]} />
            <YAxis type = "category" dataKey = "name" />
            <CartesianGrid strokeDasharray="3 3"/>
            <Tooltip/>
            <Legend />
-           <Bar isAnimationActive = {false} dataKey="TooSlow" fill="#0ABBE2" />
-           <Bar isAnimationActive = {false} dataKey="TooFast" fill="#FF0000" />
-           <Bar isAnimationActive = {false} dataKey="Confused" fill="#7D0BB6" />
+           <Bar isAnimationActive = {false} dataKey="TooFast" fill="#F1C40F" />
+           <Bar isAnimationActive = {false} dataKey="Confused" fill="#2874A6" />
+           <Bar isAnimationActive = {false} dataKey="TooSlow" fill="#E74C3C" />
           </BarChart>
         </div>
         <br></br>
 
 
     <div style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
-      <a onClick={this.incrementCount}>
-        <button className="ui green button">count</button>
-      </a>
       <a onClick={()=>{this.context.router.push("/StartPollPage");}}>
         <button className="ui green primary submit button">Start Poll</button>
       </a>
