@@ -18,15 +18,27 @@ var Screen = React.createClass({
     return{
       SessionCode:window.localStorage.getItem("sessionCode")
     };
+
+
 },
 componentDidMount:function(){
     if(window.localStorage.getItem("tokenCK") != null){
       router.push("/index");
+      token = this.window.localStorage.getItem("tokenCK");
     }
-    else if(window.localStorage.getItem("sessionCode") != null){
+    else{
+      this.killaccess();
+    }
+    if(window.localStorage.getItem("sessionCode") != null){
         router.push("/seshDashboard");
     }
 },
+  killaccess:function(){
+    token = "";
+    window.localStorage.clear();
+    this.forceUpdate();
+    hashHistory.replace('/');
+  },
   logindets:function(){
     window.localStorage.setItem("tokenCK",token);
     this.setState({token:token});
