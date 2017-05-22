@@ -7,7 +7,18 @@ var inter;
 
 const COLORS = ['#F1C40F', '#2874A6', '#E74C3C', '#28B463'];
 
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+ 	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy  + radius * Math.sin(-midAngle * RADIAN);
 
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+    	{`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+}
 
 var StartPollPage = React.createClass({
   getInitialState:function(){
@@ -32,7 +43,6 @@ var StartPollPage = React.createClass({
                 {name:"C",value:msg.Ccount},
                 {name:"D",value:msg.Dcount}];
                 this.setState({pieData:newData},()=>{this.resize();});
-
         });
     });
   },
@@ -62,6 +72,8 @@ var StartPollPage = React.createClass({
           cy="50%"
           outerRadius={200}
           fill="#8884d8"
+          labelLine={false}
+          label={renderCustomizedLabel}
         >
         	{
           	pieData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
@@ -69,24 +81,13 @@ var StartPollPage = React.createClass({
         </Pie>
       </PieChart>
 
-        {/* <table>
-        <tr>
-          <td>A</td>
-          <td>{pieData[0].value}</td>
-        </tr>
-        <tr>
-          <td>B</td>
-          <td>{pieData[1].value}</td>
-        </tr>
-        <tr>
-          <td>C</td>
-          <td>{pieData[2].value}</td>
-        </tr>
-        <tr>
-          <td>D</td>
-          <td>{pieData[3].value}</td>
-        </tr>
-      </table>*/}
+      <div id = 'PollResults' style={{textAlign:"center", display:"inlineBlock", position:"relative", fontSize:"20"}}>
+          A: {pieData[0].value}<br></br>
+          B: {pieData[1].value}<br></br>
+          C: {pieData[2].value}<br></br>
+          D: {pieData[3].value}<br></br>
+      </div>
+
         <button className = "ui red button" onClick={this.context.router.goBack}> End Poll </button>
       </div>
     </div>

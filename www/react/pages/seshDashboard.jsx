@@ -69,10 +69,14 @@ var seshDashboard = React.createClass({
        });
    });
 },
+decrementCount:function(a){
+  this.setState({[a]:this.state[a]-1})
+},
 incrementCount:function(a){
   this.setState({
     [a]:this.state[a] +1
-  });
+},
+  ()=>{setTimeout(()=>{this.decrementCount(a);}, 20000)});
 },
 componentDidMount:function() {
   this.resize;
@@ -111,7 +115,6 @@ resize:function(){
           </BarChart>
         </div>
         <br></br>
-
 
     <div style={{textAlign:"center", display:"inlineBlock", position:"relative"}}>
       <a onClick={()=>{this.context.router.push("/StartPollPage");}}>
